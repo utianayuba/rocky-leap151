@@ -33,7 +33,6 @@ ff02::3         ipv6-allhosts
 
 $CTL_MAN_IP $CTL_HOSTNAME
 $CMP_MAN_IP $CMP_HOSTNAME
-$BMT_MAN_IP $BMT_HOSTNAME
 _EOF_
 
 scp ./tmp/hosts $CTL_MAN_IP:/etc/hosts
@@ -54,11 +53,6 @@ ssh $CMP_MAN_IP systemctl enable chronyd.service
 ssh $CMP_MAN_IP systemctl restart chronyd.service
 ssh $CMP_MAN_IP systemctl status chronyd.service
 ssh $CMP_MAN_IP chronyc sources
-ssh $BMT_MAN_IP zypper -n in --no-recommends chrony
-ssh $BMT_MAN_IP systemctl enable chronyd.service
-ssh $BMT_MAN_IP systemctl restart chronyd.service
-ssh $BMT_MAN_IP systemctl status chronyd.service
-ssh $BMT_MAN_IP chronyc sources
 
 
 
@@ -70,9 +64,6 @@ ssh $CTL_MAN_IP zypper -n in --no-recommends python-openstackclient
 ssh $CMP_MAN_IP zypper addrepo -f obs://Cloud:OpenStack:Rocky/openSUSE_Leap_15.1 Rocky
 ssh $CMP_MAN_IP zypper --gpg-auto-import-keys ref && zypper -n dup
 ssh $CMP_MAN_IP zypper -n in --no-recommends python-openstackclient
-ssh $BMT_MAN_IP zypper addrepo -f obs://Cloud:OpenStack:Rocky/openSUSE_Leap_15.1 Rocky
-ssh $BMT_MAN_IP zypper --gpg-auto-import-keys ref && zypper -n dup
-ssh $BMT_MAN_IP zypper -n in --no-recommends python-openstackclient
 
 
 
@@ -157,6 +148,10 @@ ssh $CTL_MAN_IP systemctl status etcd.service
 
 ##### Apparmor Service #####
 
-systemctl stop apparmor
-systemctl disable apparmor
-reboot
+ssh $CMP_MAN_IP systemctl stop apparmor
+ssh $CMP_MAN_IP systemctl disable apparmor
+ssh $CMP_MAN_IP reboot
+
+ssh $CTL_MAN_IP systemctl stop apparmor
+ssh $CTL_MAN_IP systemctl disable apparmor
+ssh $CTL_MAN_IP reboot
