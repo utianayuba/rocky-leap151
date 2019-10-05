@@ -152,3 +152,11 @@ scp ./tmp/etc_sysconfig_etcd $CTL_MAN_IP:/etc/sysconfig/etcd
 ssh $CTL_MAN_IP systemctl enable etcd.service
 ssh $CTL_MAN_IP systemctl restart etcd.service
 ssh $CTL_MAN_IP systemctl status etcd.service
+
+
+
+##### Apparmor Service #####
+
+systemctl stop apparmor
+systemctl disable apparmor
+reboot
