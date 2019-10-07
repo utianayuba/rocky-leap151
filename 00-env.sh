@@ -37,7 +37,6 @@ _EOF_
 
 scp ./tmp/hosts $CTL_MAN_IP:/etc/hosts
 scp ./tmp/hosts $CMP_MAN_IP:/etc/hosts
-scp ./tmp/hosts $BMT_MAN_IP:/etc/hosts
 
 
 
