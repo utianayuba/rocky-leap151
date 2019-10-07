@@ -76,8 +76,8 @@ ssh $CTL_MAN_IP crudini --set /etc/neutron/neutron.conf nova password $PASSWORD
 ssh $CTL_MAN_IP crudini --set /etc/neutron/neutron.conf oslo_concurrency lock_path /var/lib/neutron/tmp
 
 ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 type_drivers vxlan,flat
-ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 tenant_network_types vxlan
-ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 mechanism_drivers openvswitch
+ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 tenant_network_types vxlan,flat
+ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 mechanism_drivers openvswitch,baremetal
 ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 extension_drivers port_security,qos
 ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2 path_mtu 0
 ssh $CTL_MAN_IP crudini --set /etc/neutron/plugins/ml2/ml2_conf.ini ml2_type_flat flat_networks external
